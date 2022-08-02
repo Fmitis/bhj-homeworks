@@ -1,19 +1,29 @@
-'use strict';
+const btn = document.querySelector('.dropdown__value');
+const list = document.querySelector('.dropdown__list');
+const links = document.querySelectorAll('a');
 
-const button = document.querySelector('.dropdown__value');
-const dropDownList = document.querySelector('.dropdown__list');
-const dropdownItems = Array.from(document.querySelectorAll('.dropdown__item'));
 
-function onClick(event) {
-   event.preventDefault();
-   button.textContent = this.textContent;
-   dropDownList.classList.remove('dropdown__list_active');
+list.classList
+
+
+btn.addEventListener('click', show);
+
+function show(event) {
+
+   if (list.className === 'dropdown__list') {
+      list.className = 'dropdown__list dropdown__list_active';
+   } else {
+      list.className = 'dropdown__list';
+   }
+
 }
 
-button.addEventListener('click', () => {
-   dropDownList.classList.add('dropdown__list_active');
-});
+for (let link of links) {
+   link.addEventListener('click', rename);
+}
 
-dropdownItems.forEach((item) => {
-   item.addEventListener('click', onClick);
-});
+function rename(event) {
+   event.preventDefault();
+   btn.textContent = event.target.textContent;
+   list.className = 'dropdown__list';
+}
