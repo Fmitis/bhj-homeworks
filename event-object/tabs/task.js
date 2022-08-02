@@ -1,22 +1,20 @@
-'use strict';
+const tabs = document.querySelectorAll('.tab');
+const contentList = document.querySelectorAll('.tab__content');
 
-const tabs = Array.from(document.querySelectorAll('.tab'));
-const tabContent = Array.from(document.querySelectorAll('.tab__content'));
-const tabPanel = document.querySelector('.tabs');
-let currentTabIndex = 0;
-
-function showText(event) {
-   event.preventDefault();
-   let tabIndex = tabs.indexOf(event.target);
-   tabs.forEach((tab) => {
-      if (tab === event.target) {
-         tab.classList.add('tab_active');
-         tabContent[tabIndex].classList.add('tab__content_active');
-         tabs[currentTabIndex].classList.remove('tab_active');
-         tabContent[currentTabIndex].classList.remove('tab__content_active');
-         currentTabIndex = tabIndex;
-      }
-   });
+for (let tab of tabs) {
+   tab.addEventListener('click', change)
 }
 
-tabPanel.addEventListener('click', showText);
+function change(event) {
+
+   for (let tab of tabs) {
+      tab.className = 'tab';
+   }
+   event.target.className = 'tab tab_active';
+
+   for (let article of contentList) {
+      article.className = 'tab__content';
+   }
+   const index = Array.from(tabs).indexOf(event.target);
+   contentList[index].className = 'tab__content tab__content_active';
+}
